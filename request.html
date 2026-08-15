@@ -1,11 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Blood | LifeDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><span class="drop">●</span> LifeDrop</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Donors</a></li>
+        <li><a href="request.html" class="active">Request Blood</a></li>
+        <li><a href="donor.html">Become a Donor</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <div class="page-header text-center">
+    <div class="container">
+      <span class="eyebrow">Blood request module</span>
+      <h1>Submit a blood request</h1>
+      <p>Fill in the patient's details and we'll match nearby donors instantly.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: start;">
+
+        <div class="form-card" style="margin: 0;">
+          <h3>Request details</h3>
+          <div class="alert" id="request-alert"></div>
+
+          <form id="request-form" novalidate>
+            <div class="form-group">
+              <label for="req-patient">Patient name</label>
+              <input type="text" id="req-patient" placeholder="Patient's full name" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="req-bloodgroup">Blood group needed</label>
+                <select id="req-bloodgroup" required>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="req-units">Units required</label>
+                <input type="number" id="req-units" min="1" value="1" required>
+                <p class="error-text">Units required must be at least 1.</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="req-hospital">Hospital</label>
+              <input type="text" id="req-hospital" placeholder="Hospital name" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="req-city">City</label>
+                <input type="text" id="req-city" placeholder="e.g. Chattogram" required>
+              </div>
+              <div class="form-group">
+                <label for="req-date">Required by</label>
+                <input type="date" id="req-date" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="req-contact">Contact number</label>
+              <input type="tel" id="req-contact" placeholder="01XXX-XXXXXX" required>
+            </div>
+
+            <div class="form-group checkbox-row">
+              <input type="checkbox" id="req-emergency">
+              <label for="req-emergency" style="margin: 0;">This is an emergency request</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+          </form>
+        </div>
+
+        <div>
+          <h3>Recent requests</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Group</th>
+                  <th>Units</th>
+                  <th>Hospital</th>
+                  <th>Needed by</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="my-requests-body">
+              </tbody>
+            </table>
+          </div>
+          <p class="hint mt-lg">Requests are reviewed and approved from the Admin Dashboard.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="logo" style="color: var(--color-white);"><span class="drop">●</span> LifeDrop</div>
+      <p>Online Blood Donation Management System</p>
+    </div>
+  </footer>
 </body>
 </html>
