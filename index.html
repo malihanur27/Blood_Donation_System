@@ -4,86 +4,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeDrop | Online Blood Donation Management System</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <div>
-      <a href=""><span>●</span> LifeDrop</a>
-      <ul>
-        <li><a href="" >Home</a></li>
-        <li><a href="">Find Donors</a></li>
-        <li><a href="">Request Blood</a></li>
-        <li><a href="">Become a Donor</a></li>
-        <li><a href="">Admin</a></li>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><span class="drop">●</span> LifeDrop</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="search.html">Find Donors</a></li>
+        <li><a href="request.html">Request Blood</a></li>
+        <li><a href="donor.html">Become a Donor</a></li>
+        <li><a href="admin.html">Admin</a></li>
       </ul>
-      <div>
-        <a href="">Log In</a>
-        <a href="">Sign Up</a>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
       </div>
-      <button>☰</button>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     </div>
   </header>
 
-  <section>
-    <div>
+  <section class="hero">
+    <div class="container">
       <div>
         <h1>Every drop connects a donor to a life saved.</h1>
-        <p>LifeDrop links blood donors, patients, hospitals and blood banks on one platform - so the right blood group is found in minutes, not hours.</p>
-        <div>
-          <a href="">Register as a Donor</a>
-          <a href="">Find a Donor Now</a>
+        <p>LifeDrop links blood donors, patients, hospitals and blood banks on one platform — so the right blood group is found in minutes, not hours.</p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary">Register as a Donor</a>
+          <a href="search.html" class="btn btn-outline">Find a Donor Now</a>
         </div>
       </div>
-      <div>
-        <div>
-
-        </div>
+      <div class="hero-visual">
+        <div class="drop-shape"></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div>
+  <section class="stats">
+    <div class="container grid grid-4">
       <div>
-        <div>8</div>
-        <div>Blood groups covered</div>
+        <div class="stat-number">8</div>
+        <div class="stat-label">Blood groups covered</div>
       </div>
       <div>
-        <div>24/7</div>
-        <div>Emergency requests</div>
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Emergency requests</div>
       </div>
       <div>
-        <div>100%</div>
-        <div>Centralized records</div>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Centralized records</div>
       </div>
       <div>
-        <div>3</div>
-        <div>Steps to donate</div>
+        <div class="stat-number">3</div>
+        <div class="stat-label">Steps to donate</div>
       </div>
     </div>
   </section>
 
-<section>
-    <div>
-      <div>
-        <span>How it works</span>
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">How it works</span>
         <h2>From registration to donation in three steps</h2>
       </div>
-      <div>
-        <div>
+      <div class="grid grid-3 step-list">
+        <div class="card step-card">
           <h3>Register your profile</h3>
           <p>Create an account, add your blood group, city and availability so recipients can find you.</p>
         </div>
-        <div>
+        <div class="card step-card">
           <h3>Get matched to a request</h3>
-          <p>Patients and hospitals search by blood group and location - you're notified when you're a match.</p>
+          <p>Patients and hospitals search by blood group and location — you're notified when you're a match.</p>
         </div>
-        <div>
+        <div class="card step-card">
           <h3>Donate and track history</h3>
           <p>Confirm the donation and your history is saved automatically for future reference.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <section class="section" style="background: var(--color-white); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Platform features</span>
+        <h2>Everything donors, patients and admins need</h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card">
+          <div class="icon-circle">👤</div>
+          <h3>Donor Profiles</h3>
+          <p>Register, update blood group and set availability status.</p>
+        </div>
+        <div class="card">
+          <div class="icon-circle">🔍</div>
+          <h3>Smart Search</h3>
+          <p>Find donors by blood group, city or availability instantly.</p>
+        </div>
+        <div class="card">
+          <div class="icon-circle">🩸</div>
+          <h3>Blood Requests</h3>
+          <p>Submit routine or emergency requests and track their status.</p>
+        </div>
+        <div class="card">
+          <div class="icon-circle">📊</div>
+          <h3>Admin Dashboard</h3>
+          <p>Approve donors, manage requests and view platform statistics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container">
+      <h2>Your donation could be the reason someone sees tomorrow.</h2>
+      <p>Sign up today — it takes less than two minutes.</p>
+      <a href="register.html" class="btn btn-primary">Get Started</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <div class="logo" style="color: var(--color-white);"><span class="drop">●</span> LifeDrop</div>
+        <p style="max-width: 280px; margin-top: 0.5rem;">Online Blood Donation Management System — connecting donors and recipients efficiently.</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="search.html">Find Donors</a></li>
+            <li><a href="request.html">Request Blood</a></li>
+            <li><a href="donor.html">Become a Donor</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="register.html">Sign Up</a></li>
+            <li><a href="admin.html">Admin Panel</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
