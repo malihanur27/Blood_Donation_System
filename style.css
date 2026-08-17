@@ -427,6 +427,32 @@ textarea:focus {
   box-shadow: var(--shadow);
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-line);
+  white-space: nowrap;
+}
+
+th {
+  background: var(--color-cream);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
 .site-footer {
   background: var(--color-ink);
   color: rgba(255, 255, 255, 0.75);
@@ -494,10 +520,32 @@ textarea:focus {
   letter-spacing: 0.08em;
 }
 
+.tab-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.tab-btn {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--color-ink);
+}
+
 .tab-btn.active {
   background: var(--color-blood);
   border-color: var(--color-blood);
   color: var(--color-white);
+}
+
+.tab-panel {
+  display: none;
 }
 
 .tab-panel.active {
