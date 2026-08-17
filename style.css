@@ -1,29 +1,3 @@
-:root {
-  --color-blood: #b3202c;
-  --color-blood-dark: #7a1620;
-  --color-cream: #fbf5f1;
-  --color-white: #ffffff;
-  --color-ink: #241a17;
-  --color-muted: #7a6d68;
-  --color-line: #e7dcd6;
-  --color-success: #1e7d45;
-  --color-success-bg: #e8f6ec;
-  --color-warning: #b3202c;
-  --color-warning-bg: #fbe9e9;
-
-  --font-heading: 'Poppins', 'Segoe UI', sans-serif;
-  --font-body: 'Inter', 'Segoe UI', sans-serif;
-
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2.5rem;
-  --space-xl: 4rem;
-
-  --radius: 10px;
-  --shadow: 0 4px 16px rgba(36, 26, 23, 0.08);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -453,14 +427,6 @@ textarea:focus {
   box-shadow: var(--shadow);
 }
 
-.pill {
-  display: inline-block;
-  padding: 0.2rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
 .site-footer {
   background: var(--color-ink);
   color: rgba(255, 255, 255, 0.75);
@@ -511,6 +477,8 @@ textarea:focus {
 
 .mt-lg { margin-top: var(--space-lg); }
 
+.mb-lg { margin-bottom: var(--space-lg); }
+
 .page-header {
   background: var(--color-white);
   border-bottom: 1px solid var(--color-line);
@@ -534,17 +502,6 @@ textarea:focus {
 
 .tab-panel.active {
   display: block;
-}
-
-@media (max-width: 900px) {
-  .hero .container {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .hero p { margin: 0 auto var(--space-sm) auto; }
-  .hero-actions { justify-content: center; }
-  .hero-visual { order: -1; }
-  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 700px) {
@@ -578,11 +535,5 @@ textarea:focus {
   }
 .site-footer .footer-cols {
     gap: var(--space-md);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    scroll-behavior: auto !important;
   }
 }

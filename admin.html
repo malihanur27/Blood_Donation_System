@@ -1,11 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | LifeDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><span class="drop">●</span> LifeDrop</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Donors</a></li>
+        <li><a href="request.html">Request Blood</a></li>
+        <li><a href="donor.html">Become a Donor</a></li>
+        <li><a href="admin.html" class="active">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <div class="page-header text-center">
+    <div class="container">
+      <span class="eyebrow">Admin module</span>
+      <h1>Admin dashboard</h1>
+      <p>Manage users, approve donors and track blood requests.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <div class="grid grid-4 mb-lg">
+        <div class="card text-center">
+          <div class="stat-number" id="stat-total-users">0</div>
+          <div class="stat-label">Total Users</div>
+        </div>
+        <div class="card text-center">
+          <div class="stat-number" id="stat-total-donors">0</div>
+          <div class="stat-label">Registered Donors</div>
+        </div>
+        <div class="card text-center">
+          <div class="stat-number" id="stat-pending-requests">0</div>
+          <div class="stat-label">Pending Requests</div>
+        </div>
+        <div class="card text-center">
+          <div class="stat-number" id="stat-emergency">0</div>
+          <div class="stat-label">Emergency Requests</div>
+        </div>
+      </div>
+
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="tab-users">Manage Users</button>
+        <button class="tab-btn" data-tab="tab-requests">Blood Requests</button>
+      </div>
+
+      <div id="tab-users" class="tab-panel active">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-requests" class="tab-panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Group</th>
+                <th>Units</th>
+                <th>Hospital / City</th>
+                <th>Needed by</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-requests-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="logo" style="color: var(--color-white);"><span class="drop">●</span> LifeDrop</div>
+      <p>Online Blood Donation Management System</p>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,11 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | LifeDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><span class="drop">●</span> LifeDrop</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Donors</a></li>
+        <li><a href="request.html">Request Blood</a></li>
+        <li><a href="donor.html">Become a Donor</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <div class="page-header text-center">
+    <div class="container">
+      <span class="eyebrow">Join LifeDrop</span>
+      <h1>Create your account</h1>
+      <p>Register as a donor or recipient in under two minutes.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="form-card">
+        <div class="alert" id="register-alert"></div>
+
+        <form id="register-form" novalidate>
+          <div class="form-group">
+            <label for="reg-name">Full name</label>
+            <input type="text" id="reg-name" placeholder="e.g. Maliha Nur Vushra" required>
+            <p class="error-text">Please enter your full name (at least 3 characters).</p>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email">Email address</label>
+            <input type="email" id="reg-email" placeholder="you@example.com" required>
+            <p class="error-text">Please enter a valid email address.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-phone">Phone number</label>
+            <input type="tel" id="reg-phone" placeholder="01XXX-XXXXXX" required>
+            <p class="error-text">Please enter a valid phone number.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-role">I am registering as</label>
+            <select id="reg-role">
+              <option value="Donor">Blood Donor</option>
+              <option value="Recipient">Recipient / Patient</option>
+              <option value="Hospital">Hospital / Blood Bank</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-password">Password</label>
+              <input type="password" id="reg-password" placeholder="At least 6 characters" required>
+              <p class="error-text">Password must be at least 6 characters.</p>
+            </div>
+            <div class="form-group">
+              <label for="reg-confirm">Confirm password</label>
+              <input type="password" id="reg-confirm" placeholder="Re-enter password" required>
+              <p class="error-text">Passwords do not match.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+          <p class="form-footer-text">Already have an account? <a href="login.html">Log in</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="logo" style="color: var(--color-white);"><span class="drop">●</span> LifeDrop</div>
+      <p>Online Blood Donation Management System</p>
+    </div>
+  </footer>
 </body>
 </html>
