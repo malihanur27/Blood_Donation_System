@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
+const donorRoutes = require("./routes/donors");
 const {
     authenticate,
     requireAdmin
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/donors", donorRoutes);
 
 app.get("/", (req, res) => {
 
