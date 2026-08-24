@@ -71,19 +71,24 @@ function showAlert(alertEl, message, type)
 
 const registerForm = document.getElementById('register-form');
 if (registerForm) {
-  registerForm.addEventListener('submit', (event) => {
+  registerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    let isValid = true;
 
+    let isValid = true;
     const name = document.getElementById('reg-name');
     const email = document.getElementById('reg-email');
     const phone = document.getElementById('reg-phone');
     const password = document.getElementById('reg-password');
     const confirm = document.getElementById('reg-confirm');
+    const role = document.getElementById('reg-role');
+    const alertBox = document.getElementById('register-alert');
 
-    if (name.value.trim().length < 3) 
-    {
-      setFieldError(name, 'Please enter your full name (at least 3 characters).');
+    if (name.value.trim().length < 3) {
+      setFieldError(
+        name,
+        'Please enter your full name (at least 3 characters).'
+      );
+
       isValid = false;
     } else {
       setFieldError(name, '');
@@ -91,87 +96,204 @@ if (registerForm) {
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value.trim())) {
-      setFieldError(email, 'Please enter a valid email address.');
+      setFieldError(
+        email,
+        'Please enter a valid email address.'
+      );
       isValid = false;
     } else {
       setFieldError(email, '');
     }
-
     const phonePattern = /^[0-9+\-\s]{7,15}$/;
     if (!phonePattern.test(phone.value.trim())) {
-      setFieldError(phone, 'Please enter a valid phone number.');
+      setFieldError(
+        phone,
+        'Please enter a valid phone number.'
+      );
       isValid = false;
     } else {
       setFieldError(phone, '');
     }
 
     if (password.value.length < 6) {
-      setFieldError(password, 'Password must be at least 6 characters.');
+      setFieldError(
+        password,
+        'Password must be at least 6 characters.'
+      );
       isValid = false;
     } else {
       setFieldError(password, '');
     }
-
     if (confirm.value !== password.value) {
-      setFieldError(confirm, 'Passwords do not match.');
+      setFieldError(
+        confirm,
+        'Passwords do not match.'
+      );
       isValid = false;
     } else {
       setFieldError(confirm, '');
     }
 
-    const alertBox = document.getElementById('register-alert');
     if (!isValid) {
-      showAlert(alertBox, 'Please fix the highlighted fields and try again.', 'error');
+      showAlert(
+        alertBox,
+        'Please fix the highlighted fields and try again.',
+        'error'
+      );
       return;
     }
 
-    const users = Store.get('users', SAMPLE_USERS);
-    users.push({
-      name: name.value.trim(),
-      email: email.value.trim(),
-      role: document.getElementById('reg-role').value,
-      status: 'Pending'
-    });
-    Store.save('users', users);
+    try {
+      const response = await fetch(
+        'http://localhost:5000/api/auth/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name.value.trim(),
+            email: email.value.trim(),
+            phone: phone.value.trim(),
+            role: role.value,
+            password: password.value
+          })
+        }
+      );
 
-    showAlert(alertBox, 'Account created! You can now log in.', 'success');
-    registerForm.reset();
+      const data = await response.json();
+      if (!response.ok) {
+        showAlert(
+          alertBox,
+          data.message || 'Registration failed.',
+          'error'
+        );
+        return;
+      }
+      localStorage.setItem(
+        'token',
+        data.token
+      );
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify(data.user)
+      );
+      showAlert(
+        alertBox,
+        'Account created successfully!',
+        'success'
+      );
+      registerForm.reset();
+
+    } catch (error) {
+      console.error(
+        'Registration error:',
+        error
+      );
+      showAlert(
+        alertBox,
+        'Unable to connect to the backend server.',
+        'error'
+      );
+    }
   });
 }
 
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
-  loginForm.addEventListener('submit', (event) => {
+  loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = document.getElementById('login-email');
     const password = document.getElementById('login-password');
     const alertBox = document.getElementById('login-alert');
     let isValid = true;
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value.trim())) {
-      setFieldError(email, 'Please enter a valid email address.');
+      setFieldError(
+        email,
+        'Please enter a valid email address.'
+      );
       isValid = false;
     } else {
       setFieldError(email, '');
     }
 
     if (password.value.length === 0) {
-      setFieldError(password, 'Please enter your password.');
+      setFieldError(
+        password,
+        'Please enter your password.'
+      );
       isValid = false;
     } else {
       setFieldError(password, '');
     }
 
     if (!isValid) {
-      showAlert(alertBox, 'Please fix the highlighted fields and try again.', 'error');
+      showAlert(
+        alertBox,
+        'Please fix the highlighted fields and try again.',
+        'error'
+      );
       return;
     }
 
-    showAlert(alertBox, 'Login successful! Redirecting...', 'success');
-    setTimeout(() => {
-      window.location.href = 'donor.html';
-    }, 900);
+    try {
+      const response = await fetch(
+        'http://localhost:5000/api/auth/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email.value.trim(),
+            password: password.value
+          })
+        }
+      );
+      const data = await response.json()
+      if (!response.ok) {
+        showAlert(
+          alertBox,
+          data.message || 'Login failed.',
+          'error'
+        );
+        return;
+      }
+      localStorage.setItem(
+        'token',
+        data.token
+      );
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify(data.user)
+      );
+      showAlert(
+        alertBox,
+        'Login successful! Redirecting...',
+        'success'
+      );
+
+      setTimeout(() => {
+        if (data.user.role === 'Donor') {
+          window.location.href = 'donor.html';
+        } else if (data.user.role === 'Admin') {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'index.html';
+        }
+      }, 900);
+    } catch (error) {
+      console.error(
+        'Login error:',
+        error
+      );
+      showAlert(
+        alertBox,
+        'Unable to connect to the backend server.',
+        'error'
+      );
+    }
   });
 }
 
