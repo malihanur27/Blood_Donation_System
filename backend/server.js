@@ -3,6 +3,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const donorRoutes = require("./routes/donors");
 const requestRoutes = require("./routes/requests");
+const adminRoutes = require("./routes/admin");
 const {
     authenticate,
     requireAdmin
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/donors", donorRoutes);
 app.use("/api/requests", requestRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
 
