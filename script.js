@@ -1,13 +1,14 @@
+const API_URL = 'http://localhost:5000/api';
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-if (navToggle && navLinks) 
-{
+
+if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
     navLinks.classList.toggle('open');
   });
 }
-const Store = 
+const Store =
 {
   get(key, fallback) {
     const raw = localStorage.getItem(key);
@@ -21,35 +22,34 @@ const Store =
     localStorage.setItem(key, JSON.stringify(list));
   }
 };
-const SAMPLE_DONORS = 
-[
-  { name: 'Rahim Uddin', bloodGroup: 'O+', city: 'Chattogram', phone: '01711-000001', available: true, lastDonation: '2026-03-10' },
-  { name: 'Karim Hossain', bloodGroup: 'A+', city: 'Dhaka', phone: '01711-000002', available: true, lastDonation: '2026-05-02' },
-  { name: 'Fatema Begum', bloodGroup: 'B+', city: 'Chattogram', phone: '01711-000003', available: false, lastDonation: '2026-01-18' },
-  { name: 'Nusrat Jahan', bloodGroup: 'AB+', city: 'Sylhet', phone: '01711-000004', available: true, lastDonation: '2025-11-22' },
-  { name: 'Imran Kabir', bloodGroup: 'O-', city: 'Dhaka', phone: '01711-000005', available: true, lastDonation: '2026-04-14' },
-  { name: 'Sabrina Akter', bloodGroup: 'A-', city: 'Chattogram', phone: '01711-000006', available: false, lastDonation: '2025-09-30' },
-  { name: 'Tanvir Ahmed', bloodGroup: 'B-', city: 'Khulna', phone: '01711-000007', available: true, lastDonation: '2026-02-08' },
-  { name: 'Mahia Islam', bloodGroup: 'AB-', city: 'Dhaka', phone: '01711-000008', available: true, lastDonation: '2026-06-01' }
-];
+const SAMPLE_DONORS =
+  [
+    { name: 'Rahim Uddin', bloodGroup: 'O+', city: 'Chattogram', phone: '01711-000001', available: true, lastDonation: '2026-03-10' },
+    { name: 'Karim Hossain', bloodGroup: 'A+', city: 'Dhaka', phone: '01711-000002', available: true, lastDonation: '2026-05-02' },
+    { name: 'Fatema Begum', bloodGroup: 'B+', city: 'Chattogram', phone: '01711-000003', available: false, lastDonation: '2026-01-18' },
+    { name: 'Nusrat Jahan', bloodGroup: 'AB+', city: 'Sylhet', phone: '01711-000004', available: true, lastDonation: '2025-11-22' },
+    { name: 'Imran Kabir', bloodGroup: 'O-', city: 'Dhaka', phone: '01711-000005', available: true, lastDonation: '2026-04-14' },
+    { name: 'Sabrina Akter', bloodGroup: 'A-', city: 'Chattogram', phone: '01711-000006', available: false, lastDonation: '2025-09-30' },
+    { name: 'Tanvir Ahmed', bloodGroup: 'B-', city: 'Khulna', phone: '01711-000007', available: true, lastDonation: '2026-02-08' },
+    { name: 'Mahia Islam', bloodGroup: 'AB-', city: 'Dhaka', phone: '01711-000008', available: true, lastDonation: '2026-06-01' }
+  ];
 
-const SAMPLE_REQUESTS = 
-[
-  { patient: 'Jasim Uddin', bloodGroup: 'O+', units: 2, hospital: 'City General Hospital', city: 'Chattogram', requiredDate: '2026-08-20', contact: '01911-111111', status: 'Pending', emergency: true },
-  { patient: 'Ayesha Siddika', bloodGroup: 'A+', units: 1, hospital: 'Metro Medical College', city: 'Dhaka', requiredDate: '2026-08-25', contact: '01911-222222', status: 'Approved', emergency: false },
-  { patient: 'Habibur Rahman', bloodGroup: 'B+', units: 3, hospital: 'Central Hospital', city: 'Sylhet', requiredDate: '2026-08-18', contact: '01911-333333', status: 'Pending', emergency: false }
-];
+const SAMPLE_REQUESTS =
+  [
+    { patient: 'Jasim Uddin', bloodGroup: 'O+', units: 2, hospital: 'City General Hospital', city: 'Chattogram', requiredDate: '2026-08-20', contact: '01911-111111', status: 'Pending', emergency: true },
+    { patient: 'Ayesha Siddika', bloodGroup: 'A+', units: 1, hospital: 'Metro Medical College', city: 'Dhaka', requiredDate: '2026-08-25', contact: '01911-222222', status: 'Approved', emergency: false },
+    { patient: 'Habibur Rahman', bloodGroup: 'B+', units: 3, hospital: 'Central Hospital', city: 'Sylhet', requiredDate: '2026-08-18', contact: '01911-333333', status: 'Pending', emergency: false }
+  ];
 
-const SAMPLE_USERS = 
-[
-  { name: 'Rahim Uddin', email: 'rahim@example.com', role: 'Donor', status: 'Approved' },
-  { name: 'Karim Hossain', email: 'karim@example.com', role: 'Donor', status: 'Approved' },
-  { name: 'Jasim Uddin', email: 'jasim@example.com', role: 'Recipient', status: 'Approved' },
-  { name: 'Nusrat Jahan', email: 'nusrat@example.com', role: 'Donor', status: 'Pending' }
-];
+const SAMPLE_USERS =
+  [
+    { name: 'Rahim Uddin', email: 'rahim@example.com', role: 'Donor', status: 'Approved' },
+    { name: 'Karim Hossain', email: 'karim@example.com', role: 'Donor', status: 'Approved' },
+    { name: 'Jasim Uddin', email: 'jasim@example.com', role: 'Recipient', status: 'Approved' },
+    { name: 'Nusrat Jahan', email: 'nusrat@example.com', role: 'Donor', status: 'Pending' }
+  ];
 
-function setFieldError(inputEl, message) 
-{
+function setFieldError(inputEl, message) {
   const group = inputEl.closest('.form-group');
   if (!group) return;
   const errorEl = group.querySelector('.error-text');
@@ -61,8 +61,7 @@ function setFieldError(inputEl, message)
   }
 }
 
-function showAlert(alertEl, message, type) 
-{
+function showAlert(alertEl, message, type) {
   alertEl.textContent = message;
   alertEl.className = 'alert ' + (type === 'success' ? 'alert-success' : 'alert-error');
   alertEl.style.display = 'block';
@@ -144,45 +143,34 @@ if (registerForm) {
     }
 
     try {
-      const response = await fetch(
-        'http://localhost:5000/api/auth/register',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name.value.trim(),
-            email: email.value.trim(),
-            phone: phone.value.trim(),
-            role: role.value,
-            password: password.value
-          })
-        }
-      );
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          password: password.value,
+          role: role.value
+        })
+      });
 
       const data = await response.json();
+
       if (!response.ok) {
-        showAlert(
-          alertBox,
-          data.message || 'Registration failed.',
-          'error'
+        throw new Error(
+          data.message || 'Registration failed.'
         );
-        return;
       }
-      localStorage.setItem(
-        'token',
-        data.token
-      );
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify(data.user)
-      );
+
       showAlert(
         alertBox,
-        'Account created successfully!',
+        'Account created! You can now log in.',
         'success'
       );
+
       registerForm.reset();
 
     } catch (error) {
@@ -238,36 +226,38 @@ if (loginForm) {
     }
 
     try {
-      const response = await fetch(
-        'http://localhost:5000/api/auth/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: email.value.trim(),
-            password: password.value
-          })
-        }
-      );
-      const data = await response.json()
+
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email.value.trim(),
+          password: password.value
+        })
+      });
+
+      const data = await response.json();
+
       if (!response.ok) {
-        showAlert(
-          alertBox,
-          data.message || 'Login failed.',
-          'error'
+        throw new Error(
+          data.message || 'Login failed.'
         );
-        return;
       }
+
       localStorage.setItem(
         'token',
         data.token
       );
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify(data.user)
-      );
+
+      if (data.user) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify(data.user)
+        );
+      }
+
       showAlert(
         alertBox,
         'Login successful! Redirecting...',
@@ -275,24 +265,31 @@ if (loginForm) {
       );
 
       setTimeout(() => {
-        if (data.user.role === 'Donor') {
-          window.location.href = 'donor.html';
-        } else if (data.user.role === 'Admin') {
+
+        if (
+          data.user &&
+          data.user.role === 'Admin'
+        ) {
           window.location.href = 'admin.html';
         } else {
-          window.location.href = 'index.html';
+          window.location.href = 'donor.html';
         }
+
       }, 900);
+
     } catch (error) {
+
       console.error(
         'Login error:',
         error
       );
+
       showAlert(
         alertBox,
-        'Unable to connect to the backend server.',
+        error.message || 'Unable to login. Please try again.',
         'error'
       );
+
     }
   });
 }
@@ -497,8 +494,8 @@ if (adminTabs.length > 0) {
           <td><span class="pill ${u.status === 'Approved' ? 'pill-success' : 'pill-warning'}">${u.status}</span></td>
           <td>
             ${u.status === 'Pending'
-              ? `<button class="btn btn-primary btn-sm" data-approve-user="${index}">Approve</button>`
-              : '—'}
+          ? `<button class="btn btn-primary btn-sm" data-approve-user="${index}">Approve</button>`
+          : '—'}
           </td>
         </tr>
       `).join('');
@@ -529,8 +526,8 @@ if (adminTabs.length > 0) {
           <td><span class="pill ${r.status === 'Approved' ? 'pill-success' : 'pill-warning'}">${r.status}</span></td>
           <td>
             ${r.status === 'Pending'
-              ? `<button class="btn btn-primary btn-sm" data-approve-request="${index}">Approve</button>`
-              : '—'}
+          ? `<button class="btn btn-primary btn-sm" data-approve-request="${index}">Approve</button>`
+          : '—'}
           </td>
         </tr>
       `).join('');
