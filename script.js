@@ -1,13 +1,14 @@
+const API_URL = 'http://localhost:5000/api';
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-if (navToggle && navLinks) 
-{
+
+if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
     navLinks.classList.toggle('open');
   });
 }
-const Store = 
+const Store =
 {
   get(key, fallback) {
     const raw = localStorage.getItem(key);
@@ -21,35 +22,34 @@ const Store =
     localStorage.setItem(key, JSON.stringify(list));
   }
 };
-const SAMPLE_DONORS = 
-[
-  { name: 'Rahim Uddin', bloodGroup: 'O+', city: 'Chattogram', phone: '01711-000001', available: true, lastDonation: '2026-03-10' },
-  { name: 'Karim Hossain', bloodGroup: 'A+', city: 'Dhaka', phone: '01711-000002', available: true, lastDonation: '2026-05-02' },
-  { name: 'Fatema Begum', bloodGroup: 'B+', city: 'Chattogram', phone: '01711-000003', available: false, lastDonation: '2026-01-18' },
-  { name: 'Nusrat Jahan', bloodGroup: 'AB+', city: 'Sylhet', phone: '01711-000004', available: true, lastDonation: '2025-11-22' },
-  { name: 'Imran Kabir', bloodGroup: 'O-', city: 'Dhaka', phone: '01711-000005', available: true, lastDonation: '2026-04-14' },
-  { name: 'Sabrina Akter', bloodGroup: 'A-', city: 'Chattogram', phone: '01711-000006', available: false, lastDonation: '2025-09-30' },
-  { name: 'Tanvir Ahmed', bloodGroup: 'B-', city: 'Khulna', phone: '01711-000007', available: true, lastDonation: '2026-02-08' },
-  { name: 'Mahia Islam', bloodGroup: 'AB-', city: 'Dhaka', phone: '01711-000008', available: true, lastDonation: '2026-06-01' }
-];
+const SAMPLE_DONORS =
+  [
+    { name: 'Rahim Uddin', bloodGroup: 'O+', city: 'Chattogram', phone: '01711-000001', available: true, lastDonation: '2026-03-10' },
+    { name: 'Karim Hossain', bloodGroup: 'A+', city: 'Dhaka', phone: '01711-000002', available: true, lastDonation: '2026-05-02' },
+    { name: 'Fatema Begum', bloodGroup: 'B+', city: 'Chattogram', phone: '01711-000003', available: false, lastDonation: '2026-01-18' },
+    { name: 'Nusrat Jahan', bloodGroup: 'AB+', city: 'Sylhet', phone: '01711-000004', available: true, lastDonation: '2025-11-22' },
+    { name: 'Imran Kabir', bloodGroup: 'O-', city: 'Dhaka', phone: '01711-000005', available: true, lastDonation: '2026-04-14' },
+    { name: 'Sabrina Akter', bloodGroup: 'A-', city: 'Chattogram', phone: '01711-000006', available: false, lastDonation: '2025-09-30' },
+    { name: 'Tanvir Ahmed', bloodGroup: 'B-', city: 'Khulna', phone: '01711-000007', available: true, lastDonation: '2026-02-08' },
+    { name: 'Mahia Islam', bloodGroup: 'AB-', city: 'Dhaka', phone: '01711-000008', available: true, lastDonation: '2026-06-01' }
+  ];
 
-const SAMPLE_REQUESTS = 
-[
-  { patient: 'Jasim Uddin', bloodGroup: 'O+', units: 2, hospital: 'City General Hospital', city: 'Chattogram', requiredDate: '2026-08-20', contact: '01911-111111', status: 'Pending', emergency: true },
-  { patient: 'Ayesha Siddika', bloodGroup: 'A+', units: 1, hospital: 'Metro Medical College', city: 'Dhaka', requiredDate: '2026-08-25', contact: '01911-222222', status: 'Approved', emergency: false },
-  { patient: 'Habibur Rahman', bloodGroup: 'B+', units: 3, hospital: 'Central Hospital', city: 'Sylhet', requiredDate: '2026-08-18', contact: '01911-333333', status: 'Pending', emergency: false }
-];
+const SAMPLE_REQUESTS =
+  [
+    { patient: 'Jasim Uddin', bloodGroup: 'O+', units: 2, hospital: 'City General Hospital', city: 'Chattogram', requiredDate: '2026-08-20', contact: '01911-111111', status: 'Pending', emergency: true },
+    { patient: 'Ayesha Siddika', bloodGroup: 'A+', units: 1, hospital: 'Metro Medical College', city: 'Dhaka', requiredDate: '2026-08-25', contact: '01911-222222', status: 'Approved', emergency: false },
+    { patient: 'Habibur Rahman', bloodGroup: 'B+', units: 3, hospital: 'Central Hospital', city: 'Sylhet', requiredDate: '2026-08-18', contact: '01911-333333', status: 'Pending', emergency: false }
+  ];
 
-const SAMPLE_USERS = 
-[
-  { name: 'Rahim Uddin', email: 'rahim@example.com', role: 'Donor', status: 'Approved' },
-  { name: 'Karim Hossain', email: 'karim@example.com', role: 'Donor', status: 'Approved' },
-  { name: 'Jasim Uddin', email: 'jasim@example.com', role: 'Recipient', status: 'Approved' },
-  { name: 'Nusrat Jahan', email: 'nusrat@example.com', role: 'Donor', status: 'Pending' }
-];
+const SAMPLE_USERS =
+  [
+    { name: 'Rahim Uddin', email: 'rahim@example.com', role: 'Donor', status: 'Approved' },
+    { name: 'Karim Hossain', email: 'karim@example.com', role: 'Donor', status: 'Approved' },
+    { name: 'Jasim Uddin', email: 'jasim@example.com', role: 'Recipient', status: 'Approved' },
+    { name: 'Nusrat Jahan', email: 'nusrat@example.com', role: 'Donor', status: 'Pending' }
+  ];
 
-function setFieldError(inputEl, message) 
-{
+function setFieldError(inputEl, message) {
   const group = inputEl.closest('.form-group');
   if (!group) return;
   const errorEl = group.querySelector('.error-text');
@@ -61,8 +61,7 @@ function setFieldError(inputEl, message)
   }
 }
 
-function showAlert(alertEl, message, type) 
-{
+function showAlert(alertEl, message, type) {
   alertEl.textContent = message;
   alertEl.className = 'alert ' + (type === 'success' ? 'alert-success' : 'alert-error');
   alertEl.style.display = 'block';
@@ -71,19 +70,24 @@ function showAlert(alertEl, message, type)
 
 const registerForm = document.getElementById('register-form');
 if (registerForm) {
-  registerForm.addEventListener('submit', (event) => {
+  registerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    let isValid = true;
 
+    let isValid = true;
     const name = document.getElementById('reg-name');
     const email = document.getElementById('reg-email');
     const phone = document.getElementById('reg-phone');
     const password = document.getElementById('reg-password');
     const confirm = document.getElementById('reg-confirm');
+    const role = document.getElementById('reg-role');
+    const alertBox = document.getElementById('register-alert');
 
-    if (name.value.trim().length < 3) 
-    {
-      setFieldError(name, 'Please enter your full name (at least 3 characters).');
+    if (name.value.trim().length < 3) {
+      setFieldError(
+        name,
+        'Please enter your full name (at least 3 characters).'
+      );
+
       isValid = false;
     } else {
       setFieldError(name, '');
@@ -91,87 +95,202 @@ if (registerForm) {
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value.trim())) {
-      setFieldError(email, 'Please enter a valid email address.');
+      setFieldError(
+        email,
+        'Please enter a valid email address.'
+      );
       isValid = false;
     } else {
       setFieldError(email, '');
     }
-
     const phonePattern = /^[0-9+\-\s]{7,15}$/;
     if (!phonePattern.test(phone.value.trim())) {
-      setFieldError(phone, 'Please enter a valid phone number.');
+      setFieldError(
+        phone,
+        'Please enter a valid phone number.'
+      );
       isValid = false;
     } else {
       setFieldError(phone, '');
     }
 
     if (password.value.length < 6) {
-      setFieldError(password, 'Password must be at least 6 characters.');
+      setFieldError(
+        password,
+        'Password must be at least 6 characters.'
+      );
       isValid = false;
     } else {
       setFieldError(password, '');
     }
-
     if (confirm.value !== password.value) {
-      setFieldError(confirm, 'Passwords do not match.');
+      setFieldError(
+        confirm,
+        'Passwords do not match.'
+      );
       isValid = false;
     } else {
       setFieldError(confirm, '');
     }
 
-    const alertBox = document.getElementById('register-alert');
     if (!isValid) {
-      showAlert(alertBox, 'Please fix the highlighted fields and try again.', 'error');
+      showAlert(
+        alertBox,
+        'Please fix the highlighted fields and try again.',
+        'error'
+      );
       return;
     }
 
-    const users = Store.get('users', SAMPLE_USERS);
-    users.push({
-      name: name.value.trim(),
-      email: email.value.trim(),
-      role: document.getElementById('reg-role').value,
-      status: 'Pending'
-    });
-    Store.save('users', users);
+    try {
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          password: password.value,
+          role: role.value
+        })
+      });
 
-    showAlert(alertBox, 'Account created! You can now log in.', 'success');
-    registerForm.reset();
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || 'Registration failed.'
+        );
+      }
+
+      showAlert(
+        alertBox,
+        'Account created! You can now log in.',
+        'success'
+      );
+
+      registerForm.reset();
+
+    } catch (error) {
+      console.error(
+        'Registration error:',
+        error
+      );
+      showAlert(
+        alertBox,
+        'Unable to connect to the backend server.',
+        'error'
+      );
+    }
   });
 }
 
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
-  loginForm.addEventListener('submit', (event) => {
+  loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = document.getElementById('login-email');
     const password = document.getElementById('login-password');
     const alertBox = document.getElementById('login-alert');
     let isValid = true;
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value.trim())) {
-      setFieldError(email, 'Please enter a valid email address.');
+      setFieldError(
+        email,
+        'Please enter a valid email address.'
+      );
       isValid = false;
     } else {
       setFieldError(email, '');
     }
 
     if (password.value.length === 0) {
-      setFieldError(password, 'Please enter your password.');
+      setFieldError(
+        password,
+        'Please enter your password.'
+      );
       isValid = false;
     } else {
       setFieldError(password, '');
     }
 
     if (!isValid) {
-      showAlert(alertBox, 'Please fix the highlighted fields and try again.', 'error');
+      showAlert(
+        alertBox,
+        'Please fix the highlighted fields and try again.',
+        'error'
+      );
       return;
     }
 
-    showAlert(alertBox, 'Login successful! Redirecting...', 'success');
-    setTimeout(() => {
-      window.location.href = 'donor.html';
-    }, 900);
+    try {
+
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email.value.trim(),
+          password: password.value
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || 'Login failed.'
+        );
+      }
+
+      localStorage.setItem(
+        'token',
+        data.token
+      );
+
+      if (data.user) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify(data.user)
+        );
+      }
+
+      showAlert(
+        alertBox,
+        'Login successful! Redirecting...',
+        'success'
+      );
+
+      setTimeout(() => {
+
+        if (
+          data.user &&
+          data.user.role === 'Admin'
+        ) {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'donor.html';
+        }
+
+      }, 900);
+
+    } catch (error) {
+
+      console.error(
+        'Login error:',
+        error
+      );
+
+      showAlert(
+        alertBox,
+        error.message || 'Unable to login. Please try again.',
+        'error'
+      );
+
+    }
   });
 }
 
@@ -375,8 +494,8 @@ if (adminTabs.length > 0) {
           <td><span class="pill ${u.status === 'Approved' ? 'pill-success' : 'pill-warning'}">${u.status}</span></td>
           <td>
             ${u.status === 'Pending'
-              ? `<button class="btn btn-primary btn-sm" data-approve-user="${index}">Approve</button>`
-              : '—'}
+          ? `<button class="btn btn-primary btn-sm" data-approve-user="${index}">Approve</button>`
+          : '—'}
           </td>
         </tr>
       `).join('');
@@ -407,8 +526,8 @@ if (adminTabs.length > 0) {
           <td><span class="pill ${r.status === 'Approved' ? 'pill-success' : 'pill-warning'}">${r.status}</span></td>
           <td>
             ${r.status === 'Pending'
-              ? `<button class="btn btn-primary btn-sm" data-approve-request="${index}">Approve</button>`
-              : '—'}
+          ? `<button class="btn btn-primary btn-sm" data-approve-request="${index}">Approve</button>`
+          : '—'}
           </td>
         </tr>
       `).join('');
