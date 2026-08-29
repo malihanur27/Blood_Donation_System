@@ -69,20 +69,46 @@ router.post(
                 name,
                 email,
                 phone,
+                role,
                 password
             } = req.body;
 
-            if (!name || !email || !phone || !password) {
+            if (
+                !name ||
+                !email ||
+                !phone ||
+                !role ||
+                !password
+            ) {
                 return res.status(400).json({
                     success: false,
-                    message: "Name, email, phone and password are required"
+                    message:
+                        "Name, email, phone, role and password are required"
+                });
+            }
+
+            const normalizedRole =
+                String(role).trim();
+
+            const allowedRoles = [
+                "Donor",
+                "Recipient",
+                "Hospital"
+            ];
+
+            if (!allowedRoles.includes(normalizedRole)) {
+                return res.status(400).json({
+                    success: false,
+                    message:
+                        "Please select a valid account type"
                 });
             }
 
             if (password.length < 6) {
                 return res.status(400).json({
                     success: false,
-                    message: "Password must be at least 6 characters"
+                    message:
+                        "Password must be at least 6 characters"
                 });
             }
 
@@ -97,25 +123,31 @@ router.post(
             if (existingUser) {
                 return res.status(409).json({
                     success: false,
-                    message: "An account with this email already exists"
+                    message:
+                        "An account with this email already exists"
                 });
             }
 
             const passwordHash =
-                await bcrypt.hash(password, 12);
+                await bcrypt.hash(
+                    password,
+                    12
+                );
 
-            const user = await User.create({
-                name: name.trim(),
-                email: normalizedEmail,
-                phone: phone.trim(),
-                role: "Donor",
-                passwordHash,
-                status: "Pending"
-            });
+            const user =
+                await User.create({
+                    name: name.trim(),
+                    email: normalizedEmail,
+                    phone: phone.trim(),
+                    role: normalizedRole,
+                    passwordHash,
+                    status: "Pending"
+                });
 
             return res.status(201).json({
                 success: true,
-                message: "Account created. Waiting for admin approval.",
+                message:
+                    "Account created. Waiting for admin approval.",
                 user: {
                     id: user._id,
                     name: user.name,
@@ -134,7 +166,8 @@ router.post(
 
             return res.status(500).json({
                 success: false,
-                message: "Server error during registration"
+                message:
+                    "Server error during registration"
             });
         }
     }
@@ -153,20 +186,24 @@ router.post(
             if (!email || !password) {
                 return res.status(400).json({
                     success: false,
-                    message: "Email and password are required"
+                    message:
+                        "Email and password are required"
                 });
             }
 
             const user =
                 await User.findOne({
                     email:
-                        email.toLowerCase().trim()
+                        email
+                            .toLowerCase()
+                            .trim()
                 });
 
             if (!user) {
                 return res.status(401).json({
                     success: false,
-                    message: "Invalid email or password"
+                    message:
+                        "Invalid email or password"
                 });
             }
 
@@ -179,21 +216,24 @@ router.post(
             if (!passwordMatch) {
                 return res.status(401).json({
                     success: false,
-                    message: "Invalid email or password"
+                    message:
+                        "Invalid email or password"
                 });
             }
 
             if (user.status === "Rejected") {
                 return res.status(403).json({
                     success: false,
-                    message: "This account has been rejected"
+                    message:
+                        "This account has been rejected"
                 });
             }
 
             if (user.status === "Pending") {
                 return res.status(403).json({
                     success: false,
-                    message: "Account waiting for admin approval"
+                    message:
+                        "Account waiting for admin approval"
                 });
             }
 
@@ -227,7 +267,8 @@ router.post(
 
             return res.status(500).json({
                 success: false,
-                message: "Server error during login"
+                message:
+                    "Server error during login"
             });
         }
     }
@@ -248,7 +289,8 @@ router.post(
 
         return res.json({
             success: true,
-            message: "Logged out successfully"
+            message:
+                "Logged out successfully"
         });
     }
 );
@@ -269,7 +311,8 @@ router.put(
             ) {
                 return res.status(400).json({
                     success: false,
-                    message: "Please provide a valid name"
+                    message:
+                        "Please provide a valid name"
                 });
             }
 
@@ -281,7 +324,8 @@ router.put(
             ) {
                 return res.status(400).json({
                     success: false,
-                    message: "Please provide a valid phone number"
+                    message:
+                        "Please provide a valid phone number"
                 });
             }
 
@@ -297,17 +341,15 @@ router.put(
                 });
             }
 
-            user.name =
-                name.trim();
-
-            user.phone =
-                phone.trim();
+            user.name = name.trim();
+            user.phone = phone.trim();
 
             await user.save();
 
             return res.json({
                 success: true,
-                message: "Profile updated successfully",
+                message:
+                    "Profile updated successfully",
                 user: {
                     id: user._id,
                     name: user.name,
@@ -326,7 +368,8 @@ router.put(
 
             return res.status(500).json({
                 success: false,
-                message: "Server error while updating profile"
+                message:
+                    "Server error while updating profile"
             });
         }
     }
@@ -348,14 +391,16 @@ router.put(
             ) {
                 return res.status(400).json({
                     success: false,
-                    message: "Current and new passwords are required"
+                    message:
+                        "Current and new passwords are required"
                 });
             }
 
             if (newPassword.length < 6) {
                 return res.status(400).json({
                     success: false,
-                    message: "New password must be at least 6 characters"
+                    message:
+                        "New password must be at least 6 characters"
                 });
             }
 
@@ -380,7 +425,8 @@ router.put(
             if (!match) {
                 return res.status(400).json({
                     success: false,
-                    message: "Current password is incorrect"
+                    message:
+                        "Current password is incorrect"
                 });
             }
 
@@ -394,7 +440,8 @@ router.put(
 
             return res.json({
                 success: true,
-                message: "Password changed successfully"
+                message:
+                    "Password changed successfully"
             });
 
         } catch (error) {
@@ -405,7 +452,8 @@ router.put(
 
             return res.status(500).json({
                 success: false,
-                message: "Server error while changing password"
+                message:
+                    "Server error while changing password"
             });
         }
     }
