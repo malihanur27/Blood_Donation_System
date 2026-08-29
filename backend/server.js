@@ -12,7 +12,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const path = require("path");
 const authRoutes = require("./routes/auth");
 const donorRoutes = require("./routes/donors");
 const requestRoutes = require("./routes/requests");
@@ -21,7 +21,7 @@ const { authenticate } = require("./middleware/auth");
 const { refreshAllDonorAvailability } = require("./utils/donorAvailability");
 
 const app = express();
-
+app.set("trust proxy", 1);
 const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:5500")
     .split(",")
     .map((origin) => origin.trim())
@@ -47,9 +47,9 @@ app.use("/api/donors", donorRoutes);
 app.use("/api/requests", requestRoutes);
 app.use("/api/admin", adminRoutes);
 
-app.get("/", (req, res) => {
-    res.send("Blood Donation System Backend is running");
-});
+const publicDir = path.join(__dirname, "public");
+
+app.use(express.static(publicDir));
 
 app.get("/api/health", (req, res) => {
     res.json({
