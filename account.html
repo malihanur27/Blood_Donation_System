@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings | LifeDrop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><span class="drop">●</span> LifeDrop</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Donors</a></li>
+        <li><a href="request.html">Request Blood</a></li>
+        <li><a href="donor.html">Become a Donor</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <div class="page-header text-center">
+    <div class="container">
+      <span class="eyebrow">Account settings</span>
+      <h1>Manage your account</h1>
+      <p>Update your profile details or change your password.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: start;">
+
+        <div class="form-card" style="margin: 0;">
+          <h3>Profile details</h3>
+          <div class="alert" id="account-profile-alert"></div>
+
+          <form id="account-profile-form" novalidate>
+            <div class="form-group">
+              <label for="account-name">Full name</label>
+              <input type="text" id="account-name" placeholder="Full name" required>
+              <p class="error-text">Please enter your full name (at least 3 characters).</p>
+            </div>
+
+            <div class="form-group">
+              <label for="account-email">Email address</label>
+              <input type="email" id="account-email" disabled>
+              <p class="hint">Email address cannot be changed.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="account-phone">Phone number</label>
+              <input type="tel" id="account-phone" placeholder="01XXX-XXXXXX" required>
+              <p class="error-text">Please enter a valid phone number.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+          </form>
+        </div>
+
+        <div class="form-card" style="margin: 0;">
+          <h3>Change password</h3>
+          <div class="alert" id="account-password-alert"></div>
+
+          <form id="account-password-form" novalidate>
+            <div class="form-group">
+              <label for="account-current-password">Current password</label>
+              <input type="password" id="account-current-password" placeholder="Enter your current password" required>
+              <p class="error-text">Please enter your current password.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="account-new-password">New password</label>
+              <input type="password" id="account-new-password" placeholder="At least 6 characters" required>
+              <p class="error-text">New password must be at least 6 characters.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="account-confirm-password">Confirm new password</label>
+              <input type="password" id="account-confirm-password" placeholder="Re-enter new password" required>
+              <p class="error-text">Passwords do not match.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Change Password</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="logo" style="color: var(--color-white);"><span class="drop">●</span> LifeDrop</div>
+      <p>Online Blood Donation Management System</p>
+    </div>
+  </footer>
+    <script src="script.js"></script>
+</body>
+</html>
