@@ -31,7 +31,6 @@ app.use(
     cors({
         credentials: true,
         origin(origin, callback) {
-            // Requests such as Postman/curl have no Origin header.
             if (!origin || allowedOrigins.includes(origin)) {
                 return callback(null, true);
             }
@@ -84,9 +83,6 @@ mongoose
     .then(async () => {
         console.log("MongoDB connected successfully");
 
-        // Keep donor eligibility current even when nobody edits a profile.
-        // API reads also refresh availability, and this hourly check updates
-        // the stored MongoDB value while the backend server is running.
         try {
             await refreshAllDonorAvailability();
         } catch (error) {
