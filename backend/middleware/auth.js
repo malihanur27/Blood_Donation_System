@@ -1,30 +1,53 @@
 const jwt = require("jsonwebtoken");
-const authenticate = (req, res, next) => {
+const User = require("../models/User");
+
+const COOKIE_NAME = "lifedrop_token";
+
+const authenticate = async (req, res, next) => {
     try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) {
+        const token =
+            req.cookies &&
+            req.cookies[COOKIE_NAME];
+
+        if (!token) {
             return res.status(401).json({
                 success: false,
                 message: "Authentication required"
             });
         }
-        const parts = authHeader.split(" ");
-        if (
-            parts.length !== 2 ||
-            parts[0] !== "Bearer"
-        ) {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid authorization format"
-            });
-        }
-        const token = parts[1];
+
         const decoded = jwt.verify(
             token,
-            process.env.JWT_SECRET || "development_secret"
+            process.env.JWT_SECRET
         );
 
-        req.user = decoded;
+        const user = await User.findById(
+            decoded.id
+        ).select(
+            "name email phone role status"
+        );
+
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: "Authentication required"
+            });
+        }
+
+        if (user.status !== "Approved") {
+            return res.status(403).json({
+                success: false,
+                message: "Account is not approved"
+            });
+        }
+
+        req.user = {
+            id: user._id.toString(),
+            email: user.email,
+            role: user.role,
+            status: user.status
+        };
+
         next();
 
     } catch (error) {
@@ -32,30 +55,36 @@ const authenticate = (req, res, next) => {
             "Authentication error:",
             error.message
         );
+
         return res.status(401).json({
             success: false,
-            message: "Invalid or expired token"
+            message: "Invalid or expired session"
         });
     }
-
 };
-const requireAdmin = (req, res, next) => {
+
+const requireAdmin = (
+    req,
+    res,
+    next
+) => {
     if (!req.user) {
         return res.status(401).json({
             success: false,
             message: "Authentication required"
         });
     }
-    if (req.user.role !== "Admin") {
 
+    if (req.user.role !== "Admin") {
         return res.status(403).json({
             success: false,
             message: "Admin access required"
         });
     }
-    next();
 
+    next();
 };
+
 module.exports = {
     authenticate,
     requireAdmin
