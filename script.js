@@ -1,14 +1,9 @@
-// API URL: local development uses port 5000. In deployment, serve the API
-// under the same origin (for example https://example.com/api), or define
-// window.LIFEDROP_API_URL before loading this script.
 const API_URL = window.LIFEDROP_API_URL ||
   ((window.location.hostname === 'localhost' ||
     window.location.hostname === '127.0.0.1')
     ? 'http://localhost:5000/api'
     : `${window.location.origin}/api`);
 
-// The browser session JWT is stored only in an httpOnly cookie by the backend.
-// All API requests therefore include credentials; JavaScript never reads the JWT.
 const nativeFetch = window.fetch.bind(window);
 window.fetch = (input, init = {}) => {
   const requestUrl =
@@ -26,10 +21,8 @@ window.fetch = (input, init = {}) => {
   return nativeFetch(input, init);
 };
 
-// Remove any JWT left by older versions of the project.
 localStorage.removeItem('token');
 
-// Escape user-supplied text before inserting it into innerHTML.
 function escapeHtml(value) {
   if (value === null || value === undefined) {
     return '';
@@ -99,8 +92,6 @@ function getStoredUser() {
   }
 }
 
-// Kept as a small compatibility helper for the existing page logic.
-// It no longer returns a JWT; it only indicates that browser user data exists.
 function getToken() {
   return getStoredUser() ? 'cookie-session' : null;
 }
@@ -199,9 +190,7 @@ function updateNavbarAuth() {
   const token = getToken();
   const user = getStoredUser();
 
-  // ==========================================
-  // NOT LOGGED IN
-  // ==========================================
+  
   if (!token || !user) {
 
     if (mainNavLinks) {
@@ -236,9 +225,7 @@ function updateNavbarAuth() {
       'account.html'
     );
 
-  // ==========================================
-  // ADMIN ACCOUNT / PROFILE PAGE
-  // ==========================================
+  
   if (
     user.role === 'Admin' &&
     isAccountPage
@@ -287,10 +274,7 @@ function updateNavbarAuth() {
     return;
   }
 
-  // ==========================================
-  // NORMAL NAVIGATION
-  // ==========================================
-
+  
   if (mainNavLinks) {
     mainNavLinks.style.display = '';
   }
@@ -387,9 +371,7 @@ function updateNavbarAuth() {
   const token = getToken();
   const user = getStoredUser();
 
-  // ==========================================
-  // NOT LOGGED IN
-  // ==========================================
+
   if (!token || !user) {
 
     if (mainNavLinks) {
@@ -424,15 +406,13 @@ function updateNavbarAuth() {
       'account.html'
     );
 
-  // ==========================================
-  // ADMIN ACCOUNT / PROFILE PAGE
-  // ==========================================
+
   if (
     user.role === 'Admin' &&
     isAccountPage
   ) {
 
-    // Hide normal user navigation
+
     if (mainNavLinks) {
       mainNavLinks.style.display = 'none';
       mainNavLinks.classList.remove('open');
@@ -442,7 +422,6 @@ function updateNavbarAuth() {
       mobileNavToggle.style.display = 'none';
     }
 
-    // Admin only sees dashboard + logout
     navActions.innerHTML = `
       <a
         href="admin.html"
@@ -475,9 +454,6 @@ function updateNavbarAuth() {
     return;
   }
 
-  // ==========================================
-  // NORMAL NAVIGATION
-  // ==========================================
 
   if (mainNavLinks) {
     mainNavLinks.style.display = '';
@@ -487,7 +463,6 @@ function updateNavbarAuth() {
     mobileNavToggle.style.display = '';
   }
 
-  // Only Admin sees Admin link
   if (adminNavLink) {
 
     const adminNavItem =
@@ -575,9 +550,6 @@ function updateNavbarAuth() {
   const token = getToken();
   const user = getStoredUser();
 
-  // ==========================================
-  // NOT LOGGED IN
-  // ==========================================
   if (!token || !user) {
 
     if (mainNavLinks) {
@@ -612,15 +584,11 @@ function updateNavbarAuth() {
       'account.html'
     );
 
-  // ==========================================
-  // ADMIN ACCOUNT / PROFILE PAGE
-  // ==========================================
   if (
     user.role === 'Admin' &&
     isAccountPage
   ) {
 
-    // Hide normal user navigation
     if (mainNavLinks) {
       mainNavLinks.style.display = 'none';
       mainNavLinks.classList.remove('open');
@@ -630,7 +598,6 @@ function updateNavbarAuth() {
       mobileNavToggle.style.display = 'none';
     }
 
-    // Admin only sees dashboard + logout
     navActions.innerHTML = `
       <a
         href="admin.html"
@@ -663,9 +630,7 @@ function updateNavbarAuth() {
     return;
   }
 
-  // ==========================================
-  // NORMAL NAVIGATION
-  // ==========================================
+
 
   if (mainNavLinks) {
     mainNavLinks.style.display = '';
@@ -675,7 +640,6 @@ function updateNavbarAuth() {
     mobileNavToggle.style.display = '';
   }
 
-  // Only Admin sees Admin link
   if (adminNavLink) {
 
     const adminNavItem =
@@ -1507,10 +1471,7 @@ if (donorForm) {
         lastDonationDate:
           lastDonationEl.value || null,
 
-        // Keep the donor's choice separately from effective eligibility.
-        // `available` is false during the 90-day wait, while
-        // `availabilityRequested` remembers that the donor wants to become
-        // available automatically when the waiting period ends.
+
         availabilityRequested:
           availableEl.checked,
 
@@ -2838,7 +2799,6 @@ logoutButtons.forEach(
   }
 );
 
-// ---------- Account settings page (Edit Profile / Change Password) ----------
 
 const accountProfileForm = document.getElementById(
   'account-profile-form'

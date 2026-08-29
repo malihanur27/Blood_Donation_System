@@ -27,9 +27,7 @@ function getRequestedAvailability(donor) {
         return donor.availabilityRequested;
     }
 
-    // Compatibility for donor records created before availabilityRequested existed.
-    // A recent donation normally forced available=false, so preserve the likely
-    // original intent and let the donor become available automatically at day 90.
+
     if (!isDonationIntervalEligible(donor.lastDonationDate)) {
         return true;
     }
