@@ -44,6 +44,13 @@
           <h3>Profile details</h3>
           <div class="alert" id="donor-alert"></div>
 
+          <div class="card" style="margin-bottom: 1rem; padding: 1rem;">
+            <strong>Donation eligibility</strong>
+            <p id="donor-availability-status" class="hint" style="margin: .35rem 0 0;">
+              Save your donor profile to check your current donation eligibility.
+            </p>
+          </div>
+
           <form id="donor-form" novalidate>
             <div class="form-row">
               <div class="form-group">
@@ -82,7 +89,13 @@
 
             <div class="form-group">
               <label for="donor-address">Address</label>
-              <textarea id="donor-address" rows="2" placeholder="Street, area"></textarea>
+              <textarea id="donor-address" rows="2" placeholder="Street, area" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="donor-last-donation">Last donation date (optional)</label>
+              <input type="date" id="donor-last-donation">
+              <p class="hint">If you donated within the last 90 days, availability will remain off.</p>
             </div>
 
             <div class="form-group checkbox-row">
