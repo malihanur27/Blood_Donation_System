@@ -13,6 +13,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth");
 const donorRoutes = require("./routes/donors");
 const requestRoutes = require("./routes/requests");
@@ -41,7 +42,7 @@ app.use(
 );
 
 app.use(express.json({ limit: "100kb" }));
-
+app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/donors", donorRoutes);
 app.use("/api/requests", requestRoutes);
