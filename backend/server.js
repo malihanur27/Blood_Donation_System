@@ -97,7 +97,7 @@ mongoose
 
         availabilityRefreshTimer.unref();
 
-        app.listen(PORT, () => {
+        app.listen(PORT, "0.0.0.0", () => {
             console.log(`Server running at http://localhost:${PORT}`);
             console.log(`Allowed frontend origin(s): ${allowedOrigins.join(", ")}`);
         });
