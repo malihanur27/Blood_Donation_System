@@ -10,26 +10,22 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container nav">
-      <a href="index.html" class="logo"><span class="drop">●</span> LifeDrop</a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="search.html">Find Donors</a></li>
-        <li><a href="request.html">Request Blood</a></li>
-        <li><a href="donor.html">Become a Donor</a></li>
-        <li><a href="admin.html" class="active">Admin</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
-        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
-      </div>
-      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-    </div>
-  </header>
-
   <div class="page-header text-center">
     <div class="container">
+      <div style="display:flex; justify-content:flex-end; gap:.5rem; margin-bottom:.75rem;">
+
+  <a href="account.html"
+     class="btn btn-outline btn-sm">
+    Profile
+  </a>
+
+  <button type="button"
+          id="logout-btn"
+          class="btn btn-outline btn-sm">
+    Log Out
+  </button>
+
+</div>
       <span class="eyebrow">Admin module</span>
       <h1>Admin dashboard</h1>
       <p>Manage users, approve donors and track blood requests.</p>
@@ -49,8 +45,16 @@
           <div class="stat-label">Registered Donors</div>
         </div>
         <div class="card text-center">
+          <div class="stat-number" id="stat-available-donors">0</div>
+          <div class="stat-label">Available Donors</div>
+        </div>
+        <div class="card text-center">
           <div class="stat-number" id="stat-pending-requests">0</div>
           <div class="stat-label">Pending Requests</div>
+        </div>
+        <div class="card text-center">
+          <div class="stat-number" id="stat-matched-requests">0</div>
+          <div class="stat-label">Matched Requests</div>
         </div>
         <div class="card text-center">
           <div class="stat-number" id="stat-emergency">0</div>
@@ -60,10 +64,14 @@
 
       <div class="tab-buttons">
         <button class="tab-btn active" data-tab="tab-users">Manage Users</button>
+        <button class="tab-btn" data-tab="tab-donors">Donors</button>
         <button class="tab-btn" data-tab="tab-requests">Blood Requests</button>
       </div>
 
       <div id="tab-users" class="tab-panel active">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.75rem;">
+          <button type="button" id="export-users-btn" class="btn btn-outline btn-sm">⬇ Export Users Report (CSV)</button>
+        </div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -81,17 +89,40 @@
         </div>
       </div>
 
-      <div id="tab-requests" class="tab-panel">
+      <div id="tab-donors" class="tab-panel">
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Patient</th>
+                <th>Name</th>
+                <th>Blood Group</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Last Donation</th>
+                <th>Availability</th>
+                <th>Verification</th>
+              </tr>
+            </thead>
+            <tbody id="admin-donors-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-requests" class="tab-panel">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.75rem;">
+          <button type="button" id="export-requests-btn" class="btn btn-outline btn-sm">⬇ Export Requests Report (CSV)</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Patient / Requester</th>
                 <th>Group</th>
                 <th>Units</th>
                 <th>Hospital / City</th>
                 <th>Needed by</th>
-                <th>Status</th>
+                <th>Status / Progress</th>
+                <th>Matched Donor(s)</th>
                 <th>Action</th>
               </tr>
             </thead>

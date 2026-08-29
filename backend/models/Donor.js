@@ -44,10 +44,16 @@ const donorSchema = new mongoose.Schema(
             type: Date,
             default: null
         },
+        // What the donor selected in the profile form. This is kept separate
+        // from the effective `available` flag so the donor can automatically
+        // become available after the 90-day waiting period.
+        availabilityRequested: {
+            type: Boolean,
+            default: null
+        },
         available: {
             type: Boolean,
             default: true
-            
         },
         verified: {
             type: Boolean,
@@ -59,5 +65,9 @@ const donorSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+// FIX: compound index matching the /api/donors search filter
+// (available + bloodGroup + city).
+donorSchema.index({ available: 1, bloodGroup: 1, city: 1 });
 
 module.exports = mongoose.model("Donor", donorSchema);
